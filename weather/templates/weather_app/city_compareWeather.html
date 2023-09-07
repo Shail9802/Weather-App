@@ -1,0 +1,12 @@
+{% if weather_data %}
+<div class="forecast-container">
+    <div class="forecast">
+
+    <h1>{{ weather_data.city }}</h1>
+    <h2>{{ weather_data.temperature }}°C</h2>
+    <p>{{ weather_data.description }}</p>
+    <img src="{{ weather_data.icon }}" alt="{{ weather_data.description }}">
+</div>
+</div>
+
+{% endif %}

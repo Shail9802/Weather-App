@@ -1,0 +1,33 @@
+{% comment %} {% if daily_forecasts %}
+    <h2>{{city}}</h2>
+    <div class="forecast-container">
+        {% for forecast in daily_forecasts %}
+        <div class="forecast">
+                <h3>{{ forecast.date }}</h3>
+                <p>{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                <p>{{ forecast.description }}</p>
+                <img src="{{forecast.icon}}" alt="{{ forecast.description }}">
+            </div>
+        {% endfor %}
+    </div>
+{% endif %} {% endcomment %}
+
+{% if daily_forecasts %}
+<div class="container mt-5">
+    <h2 class="text-center">{{ city }}</h2>
+    <div class="row">
+        {% for forecast in daily_forecasts %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ forecast.date }}</h5>
+                    <p class="card-text">{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                    <p class="card-text">{{ forecast.description }}</p>
+                    <img src="{{ forecast.icon }}" alt="{{ forecast.description }}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
