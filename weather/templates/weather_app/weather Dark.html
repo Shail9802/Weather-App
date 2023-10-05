@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather App</title>
+        <!-- Include Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    </head>
+<body>
+    <!-- Include Bootstrap Navbar -->
+    {% include 'weather_app/navbar.html' %}
+
+    <div class="container mt-5">
+        <h2 class="text-center">Weather</h2>
+
+        <!-- Dark Mode Toggle Switch -->
+        <div class="custom-control custom-switch text-center">
+            <input type="checkbox" class="custom-control-input" id="dark-mode-toggle">
+            <label class="custom-control-label" for="dark-mode-toggle">Dark Mode</label>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" name="city" placeholder="Enter City 1" required>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Get Weather</button>
+              </div>
+            </div>
+          </form>
+      
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              {% if weather_data %}
+                <div class="card">
+                  <div class="card-body">
+                    {% include 'weather_app/city_compareWeather.html' with weather_data=weather_data %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if error_message %}
+                <div class="alert alert-danger mt-3 text-center">
+                  {{ error_message }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+    </div>
+
+    <!-- Include Bootstrap JavaScript and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <!-- Your dark mode JavaScript code -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleSwitch = document.querySelector("#dark-mode-toggle");
+        
+            // Function to toggle dark mode
+            function toggleDarkMode() {
+                if (toggleSwitch.checked) {
+                    document.body.classList.add("bg-dark");
+                    document.body.classList.add("text-light");
+                } else {
+                    document.body.classList.remove("bg-dark");
+                    document.body.classList.remove("text-light");
+                }
+            }
+        
+            // Event listener for the toggle switch
+            toggleSwitch.addEventListener("change", toggleDarkMode);
+        
+            // Check user's dark mode preference from local storage
+            const currentMode = localStorage.getItem("darkMode");
+            if (currentMode === "enabled") {
+                toggleSwitch.checked = true;
+                toggleDarkMode();
+            }
+        });
+        
+    </script>
+</body>
+</html>

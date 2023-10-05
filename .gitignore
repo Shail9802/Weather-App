@@ -18,4 +18,6 @@ coverage.xml
 *.pot
 *.mo
 *.log.
+*.txt
+*.rtf
 API_KEY

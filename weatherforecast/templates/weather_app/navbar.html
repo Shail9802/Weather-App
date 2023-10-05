@@ -17,5 +17,16 @@
                 <a class="nav-link" href="{% url 'forecastCompare' %}">Compare Forecast</a>
             </li>
         </ul>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'logout' %}">Logout({{user.username}})</a>
+               {% else %}
+                <a class="nav-link" href="{% url 'login'%}">Login</a>
+                {% endif %}
+                <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+               </div>
+        </div>
+
     </div>
 </nav>

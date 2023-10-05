@@ -18,13 +18,14 @@
     <div class="row">
         {% for forecast in daily_forecasts %}
         <div class="col-md-4">
-            <div class="card mb-3">
+            <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ forecast.date }}</h5>
-                    <p class="card-text">{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                    <h5 class="card-title text-light">{{ forecast.date }}</h5>
+                    <p class="card-text text-light">{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
                     <p class="card-text">{{ forecast.description }}</p>
                     <img src="{{ forecast.icon }}" alt="{{ forecast.description }}" class="img-fluid">
                 </div>
+            </div>
             </div>
         </div>
         {% endfor %}

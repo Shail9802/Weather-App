@@ -2,10 +2,13 @@ import datetime
 
 from django.shortcuts import render
 import requests 
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+@login_required(login_url='login')
 def forecast(request):
-    API_KEY = open("D:\BTech CSE Sem4\Python\Group Project\weatherproject\API_KEY","r").read()
+    API_KEY = open("C:\\Users\\Thinkbook 13s G2\\Desktop\\weatherproject\\API_KEY","r").read()
     forecast_url = "https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days=3&aqi=no&alerts=no"
 
     if request.method == "POST":
@@ -30,9 +33,9 @@ def forecast(request):
         # return render(request,"weather_app/forecast.html")
         return render(request,"weather_app/forecast.html")         
     
-    
+@login_required(login_url='login')    
 def forecastCompare(request):
-    API_KEY = open("D:\BTech CSE Sem4\Python\Group Project\weatherproject\API_KEY","r").read()
+    API_KEY = open("C:\\Users\\Thinkbook 13s G2\\Desktop\\weatherproject\\API_KEY","r").read()
     forecast_url = "https://api.weatherapi.com/v1/forecast.json?key={}&q={}&days=3&aqi=no&alerts=no"
 
     if request.method == "POST":
